@@ -42,78 +42,7 @@
 </div>
 
 <script>
-  let expression = "";
-
-  function inputValue(val) {
-    expression += val;
-    document.getElementById("view").value = expression;
-  }
-
-  function clearInput() {
-    expression = "";
-    document.getElementById("view").value = "";
-  }
-
-  function calculateResult() {
-    expression = document.getElementById("view").value;
-
-    let num1 = "";
-    let num2 = "";
-    let operator = "";
-    let foundOperator = false;
-
-    for (let i = 0; i < expression.length; i++) {
-      let char = expression[i];
-
-      if (char >= '0' && char <= '9') {
-        if (!foundOperator) {
-          num1 += char;
-        } else {
-          num2 += char;
-        }
-      } else if (char === '+' || char === '-' || char === '*' || char === '/') {
-        if (foundOperator || num1 === "") {
-          document.getElementById("view").value = "Error";
-          expression ="";
-          return;
-        }
-        operator = char;
-        foundOperator = true;
-      } else {
-        document.getElementById("view").value = "Error";
-        expression ="";
-        return;
-      }
-    }
-
-    if (num1 === "" || num2 === "" || operator === "") {
-      document.getElementById("view").value = "Error";
-      expression ="";
-      return;
-    }
-
-    let result = 0;
-    let number1 = parseFloat(num1);
-    let number2 = parseFloat(num2);
-
-    if (operator === "+") {
-      result = number1 + number2;
-    } else if (operator === "-") {
-      result = number1 - number2;
-    } else if (operator === "*") {
-      result = number1 * number2;
-    } else if (operator === "/") {
-      if (number2 === 0) {
-        document.getElementById("view").value = "Error";
-        expression ="";
-        return;
-      }
-      result = number1 / number2;
-    }
-
-    document.getElementById("view").value = result;
-    expression = result;
-  }
+  
 
   /*DISCLAIMER: DO NOT USE THIS APPROACH,
    such a pain in the ass to make a calculator from if-else
