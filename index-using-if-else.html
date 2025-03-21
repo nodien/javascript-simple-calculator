@@ -42,7 +42,67 @@
 </div>
 
 <script>
-  
+  let num1 = "";
+  let num2 = "";
+  let operator = "";
+  let isOperatorSet = false;
+
+  function inputValue(val) {
+    if (!isOperatorSet) {
+      num1 += val;
+    } else {
+      num2 += val;
+    }
+    document.getElementById("view").value = num1 + operator + num2;
+  }
+
+  function inputOperator(op) {
+    if (num1 === "") return; // Prevent operator input at the start
+    if (!isOperatorSet) {
+      operator = op;
+      isOperatorSet = true;
+    }
+    document.getElementById("view").value = num1 + operator;
+  }
+
+  function clearInput() {
+    num1 = "";
+    num2 = "";
+    operator = "";
+    isOperatorSet = false;
+    document.getElementById("view").value = "";
+  }
+
+  function calculateResult() {
+    if (num1 === "" || num2 === "" || operator === "") {
+      document.getElementById("view").value = "Error";
+      return;
+    }
+
+    let number1 = parseFloat(num1);
+    let number2 = parseFloat(num2);
+    let result = 0;
+
+    if (operator === "+") {
+      result = number1 + number2;
+    } else if (operator === "-") {
+      result = number1 - number2;
+    } else if (operator === "*") {
+      result = number1 * number2;
+    } else if (operator === "/") {
+      if (number2 === 0) {
+        document.getElementById("view").value = "Error";
+        return;
+      }
+      result = number1 / number2;
+    }
+
+    document.getElementById("view").value = result;
+    num1 = result.toString();
+    num2 = "";
+    operator = "";
+    isOperatorSet = false;
+  }
 
   /*DISCLAIMER: DO NOT USE THIS APPROACH,
    such a pain in the ass to make a calculator from if-else
